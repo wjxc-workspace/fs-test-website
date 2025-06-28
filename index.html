@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FIRST 精神與背景互動介紹</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <!-- Chosen Palette: Warm Neutral Harmony -->
+    <!-- Application Structure Plan: A thematic, single-page journey designed for high-school students. The flow starts with a broad introduction ("What is FIRST?"), dives into the core philosophy ("Core Spirit") using interactive cards for engagement, visually compares the different competitions ("Competitions"), and concludes with the personal benefits ("Why Join?"). This narrative structure is more engaging than a simple report format, guiding the user from awareness to interest and finally to understanding the value proposition. Key interactions include tab-based content reveals and interactive charts to make data digestible and encourage exploration. -->
+    <!-- Visualization & Content Choices: 
+        1. Report Info: Core values (Gracious Professionalism, Coopertition, etc.). Goal: Organize/Inform. Viz: Interactive HTML cards. Interaction: Click/hover to reveal details. Justification: Encourages user discovery and breaks down complex concepts into bite-sized, engaging pieces. Method: HTML/CSS/JS.
+        2. Report Info: Comparison of FRC and FTC competitions. Goal: Compare. Viz: Bar Chart. Interaction: Hover for tooltips showing specific data (e.g., robot weight). Justification: Provides a quick, clear visual representation of the scale and differences between the competitions, which is more effective than text alone. Library: Chart.js.
+        3. Report Info: Skills gained from participation. Goal: Inform/Persuade. Viz: Doughnut Chart. Interaction: Hover for percentage details. Justification: Visually represents the well-rounded skillset developed in FIRST, emphasizing that it's "More Than Robots." Library: Chart.js.
+    -->
+</head>
+<body class="bg-[#F8F7F4] text-[#2C3E50] font-['Noto_Sans_TC']">
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-[#34568B]">FUTURE SHOCK 探索指南</div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="nav-link border-b-2 border-transparent pb-1 hover:border-[#F9A825] transition-colors duration-200">關於 FIRST</a>
+                <a href="#spirit" class="nav-link border-b-2 border-transparent pb-1 hover:border-[#F9A825] transition-colors duration-200">核心精神</a>
+                <a href="#competitions" class="nav-link border-b-2 border-transparent pb-1 hover:border-[#F9A825] transition-colors duration-200">賽事一覽</a>
+                <a href="#why-join" class="nav-link border-b-2 border-transparent pb-1 hover:border-[#F9A825] transition-colors duration-200">為何加入</a>
+                
+                <!-- Resources Dropdown for Desktop -->
+                <div class="relative group">
+                    <a href="#resources" class="nav-link border-b-2 border-transparent pb-1 hover:border-[#F9A825] transition-colors duration-200">資源 <span class="ml-1 inline-block transform group-hover:rotate-180 transition-transform duration-200">▼</span></a>
+                    <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg py-2 mt-2 w-48 z-10 right-0 transition-all duration-300 ease-in-out transform scale-95 opacity-0 group-hover:scale-100 group-hover:opacity-100">
+                        <a href="/resources/programming.html" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">程式設計</a>
+                        <a href="/resources/mechanical.html" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">機械設計</a>
+                        <a href="/resources/design.html" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">外觀設計</a>
+                        <a href="/resources/business.html" target="_blank" rel="noopener noreferrer" class="block px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-md">商業運營</a>
+                    </div>
+                </div>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-2xl text-[#34568B] focus:outline-none">☰</button>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-lg">
+            <a href="#about" class="block text-center py-3 px-4 text-gray-700 hover:bg-gray-100 border-b border-gray-100">關於 FIRST</a>
+            <a href="#spirit" class="block text-center py-3 px-4 text-gray-700 hover:bg-gray-100 border-b border-gray-100">核心精神</a>
+            <a href="#competitions" class="block text-center py-3 px-4 text-gray-700 hover:bg-gray-100 border-b border-gray-100">賽事一覽</a>
+            <a href="#why-join" class="block text-center py-3 px-4 text-gray-700 hover:bg-gray-100 border-b border-gray-100">為何加入</a>
+            
+            <!-- Resources Dropdown for Mobile (Accordion Style) -->
+            <button class="block w-full text-left py-3 px-4 text-gray-700 hover:bg-gray-100 focus:outline-none border-b border-gray-100" id="mobile-resources-toggle">資源 <span class="float-right transform transition-transform duration-200" id="mobile-resources-arrow">▼</span></button>
+            <div id="mobile-resources-submenu" class="hidden pl-8 bg-gray-50 border-t border-gray-100">
+                <a href="/resources/programming.html" target="_blank" rel="noopener noreferrer" class="block py-2 px-4 text-gray-600 hover:bg-gray-100">程式設計</a>
+                <a href="/resources/mechanical.html" target="_blank" rel="noopener noreferrer" class="block py-2 px-4 text-gray-600 hover:bg-gray-100">機械設計</a>
+                <a href="/resources/design.html" target="_blank" rel="noopener noreferrer" class="block py-2 px-4 text-gray-600 hover:bg-gray-100">外觀設計</a>
+                <a href="/resources/business.html" target="_blank" rel="noopener noreferrer" class="block py-2 px-4 text-gray-600 hover:bg-gray-100">商業運營</a>
+            </div>
+        </div>
+    </header>
+
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="h-screen flex items-center justify-center bg-gradient-to-br from-[#F8F7F4] to-white">
+            <div class="text-center px-4">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4 text-[#34568B] animate-fade-in-down">這不只是一場機器人比賽。</h1>
+                <p class="text-lg md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto animate-fade-in-up">歡迎來到 FIRST 的世界——一個啟發科學與技術的靈感、並給予認可的全球社群。</p>
+                <a href="#about" class="bg-[#F9A825] text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-[#E89A20] transition-all duration-300 transform hover:scale-105 shadow-lg">開始探索</a>
+            </div>
+        </section>
+        
+        <!-- About FIRST Section -->
+        <section id="about" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-[#2C3E50]">關於 FIRST</h2>
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <p class="text-lg text-gray-700 leading-relaxed">本節將介紹 FIRST 的起源和核心使命。你會了解到，FIRST 是由發明家狄恩·卡門 (Dean Kamen) 於1989年創立的非營利組織，其全名為「For Inspiration and Recognition of Science and Technology」。他的目標是創建一個能像職業運動一樣吸引人、激發年輕人對科學技術熱情的平台，從而培養下一代的科技領袖和創新者。</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold mb-4 text-[#34568B] text-center">一個絕妙的點子</h3>
+                        <p class="text-gray-700 leading-relaxed">創辦人狄恩·卡門發現，社會對運動明星的關注遠超科學家。他想改變這個現況，讓科學與技術變得跟運動一樣酷、一樣受歡迎。於是，FIRST 應運而生，它將科技的嚴謹與運動的刺激相結合，創造出獨一無二的「心靈極限運動」(The Ultimate Sport for the Mind)。</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold mb-4 text-[#34568B] text-center">FIRST 的使命</h3>
+                        <p class="text-center text-gray-700 leading-relaxed">激勵年輕人成為科學和技術領域的領導者與創新者，讓他們參與到激動人心的、有導師指導的項目中，從而培養科學、工程和技術技能，激發創新，並塑造自信、溝通和領導力等全方位生活能力。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Spirit Section -->
+        <section id="spirit" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#2C3E50]">FIRST 的核心精神</h2>
+                <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-12">FIRST 的靈魂在於其獨特的文化。在這裡，我們將深入探討兩個最重要的核心價值觀：「高尚的專業精神」和「競賽合作共存」。你可以點擊下方的按鈕來切換查看它們的詳細解釋。這兩個理念定義了 FIRST 社群的互動方式，強調即使在激烈的競爭中，尊重、同理心與互助合作也至關重要。</p>
+                <div class="max-w-3xl mx-auto">
+                    <div class="flex justify-center mb-8 border-b-2 border-gray-200">
+                        <button data-tab="gp" class="tab active text-lg font-medium py-3 px-6 -mb-px border-b-4 border-transparent transition-all duration-200">高尚的專業精神</button>
+                        <button data-tab="coop" class="tab text-lg font-medium py-3 px-6 -mb-px border-b-4 border-transparent transition-all duration-200">競賽合作共存</button>
+                    </div>
+                    <div id="gp" class="tab-content active bg-gray-50 p-8 rounded-lg shadow-lg text-center transition-all duration-500 ease-in-out transform scale-100 opacity-100">
+                        <h3 class="text-2xl font-bold mb-4 text-[#34568B]">Gracious Professionalism®</h3>
+                        <p class="text-gray-700 leading-relaxed">這是一種鼓勵高品質工作、強調他人價值、尊重個人與社群的處事方式。在這個理念下，激烈的競爭與共同的利益可以並存。參賽者會瘋狂地學習和競爭，但同時會以尊重和善意對待彼此，甚至是對手。這意味著，在賽場上全力以赴，在場下互相扶持。</p>
+                    </div>
+                    <div id="coop" class="tab-content bg-gray-50 p-8 rounded-lg shadow-lg text-center transition-all duration-500 ease-in-out transform scale-95 opacity-0 hidden">
+                        <h3 class="text-2xl font-bold mb-4 text-[#34568B]">Coopertition®</h3>
+                        <p class="text-gray-700 leading-relaxed">這個詞由「合作」(Cooperation) 和「競爭」(Competition) 組成，完美詮釋了 FIRST 賽事的精神。隊伍需要在聯盟內合作以贏得比賽，同時又要與其他聯盟競爭。更深層的意義是，隊伍之間會互相幫助、分享知識，因為整個社群的共同成長比單一隊伍的勝利更重要。</p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-16">
+                    <div class="value-card bg-gray-50 p-6 rounded-lg text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2 text-[#34568B]">探索</h4>
+                        <p class="text-gray-700">我們探索新的技能與想法。</p>
+                    </div>
+                    <div class="value-card bg-gray-50 p-6 rounded-lg text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2 text-[#34568B]">創新</h4>
+                        <p class="text-gray-700">我們用創意及堅持不懈的精神解決問題。</p>
+                    </div>
+                    <div class="value-card bg-gray-50 p-6 rounded-lg text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2 text-[#34568B]">影響</h4>
+                        <p class="text-gray-700">我們應用學到的知識去改變世界。</p>
+                    </div>
+                    <div class="value-card bg-gray-50 p-6 rounded-lg text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2 text-[#34568B]">包容</h4>
+                        <p class="text-gray-700">我們尊重他人並接納彼此的不同。</p>
+                    </div>
+                    <div class="value-card bg-gray-50 p-6 rounded-lg text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2 text-[#34568B]">團隊合作</h4>
+                        <p class="text-gray-700">我們合力工作的效果更強大。</p>
+                    </div>
+                    <div class="value-card bg-gray-50 p-6 rounded-lg text-center shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                        <h4 class="text-xl font-bold mb-2 text-[#F9A825]">樂在其中</h4>
+                        <p class="text-gray-700">我們享受並讚揚我們的工作！</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Competitions Section -->
+        <section id="competitions" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4 text-[#2C3E50]">賽事一覽</h2>
+                <p class="text-lg text-gray-700 text-center max-w-4xl mx-auto mb-12">FIRST 為不同年齡段的學生提供了一系列競賽項目。本節將重點介紹高中生最常參與的兩個賽事：FIRST Robotics Competition (FRC) 和 FIRST Tech Challenge (FTC)。下方的比較圖表將幫助你快速理解它們在機器人規模、團隊組成等方面的差異，讓你對這兩個挑戰有更直觀的認識。</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold text-center mb-4 text-[#34568B]">FRC (FIRST Robotics Competition)</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>年齡：</strong> 14-18歲 高中生<br>
+                            <strong>挑戰：</strong> 在六週內建造一台工業級大小（約55公斤）的機器人，參與激烈的場地對抗賽。<br>
+                            <strong>重點：</strong> 除了工程技術，也極度重視團隊品牌、募款和社區推廣等商業運營技能。
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold text-center mb-4 text-[#34568B]">FTC (FIRST Tech Challenge)</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>年齡：</strong> 12-18歲 中學生<br>
+                            <strong>挑戰：</strong> 設計、建造和編寫一台較小型的機器人（約19公斤），在聯盟賽中與對手競爭。<br>
+                            <strong>重點：：</strong> 更著重於工程筆記本的記錄與設計過程，規模較小，適合規模較小的團隊入門。
+                        </p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                        <h3 class="text-2xl font-bold text-center mb-4 text-[#34568B]">FLL (FIRST LEGO League)</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            <strong>年齡：</strong> 4-16歲 學齡前~中學生<br>
+                            <strong>挑戰：</strong> 用 LEGO® ，透過趣味十足的動手挑戰，向孩子們介紹STEM。<br>
+                            <strong>重點：</strong> 透過引導式全球機器人計畫獲得解決現實世界問題的經驗。
+                        </p>
+                    </div>
+                </div>
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-center mb-6 text-[#2C3E50]">賽事規模快速比較</h3>
+                    <div class="chart-container bg-white p-6 rounded-lg shadow-xl max-w-2xl mx-auto relative h-80 md:h-96">
+                        <canvas id="competitionsChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Join Section -->
+        <section id="why-join" class="py-20 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#2C3E50]">為何加入 FIRST？</h2>
+                <p class="text-lg text-gray-700 max-w-4xl mx-auto mb-12">參與 FIRST 不僅是學習如何造機器人，更是一次全方位的成長經歷。在這裡，你將獲得的不只是技術知識，還包括團隊合作、解決問題和領導力等未來成功的關鍵軟技能。下方的圖表直觀地展示了 FIRST 參與者在各項能力上的收穫，證明了這是一項能為你未來學術和職業生涯做好充分準備的綜合性挑戰。</p>
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div class="chart-container h-80 md:h-96 bg-white p-6 rounded-lg shadow-xl relative">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold mb-4 text-[#34568B]">收穫的不只是技術</h3>
+                        <ul class="text-left space-y-3 text-gray-700 text-lg">
+                            <li class="flex items-start"><span class="text-[#34568B] font-bold mr-2 text-xl">✓</span> <span>學習寶貴的 STEM 技能與解決問題的能力。</span></li>
+                            <li class="flex items-start"><span class="text-[#34568B] font-bold mr-2 text-xl">✓</span> <span>建立自信，學習如何像專業人士一樣溝通與協作。</span></li>
+                            <li class="flex items-start"><span class="text-[#34568B] font-bold mr-2 text-xl">✓</span> <span>獲得全球數千項大學獎學金的申請資格。</span></li>
+                            <li class="flex items-start"><span class="text-[#34568B] font-bold mr-2 text-xl">✓</span> <span>成為全球社群的一員，為未來學術與職業生涯鋪路。</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-[#2C3E50]">更多資源</h2>
+                <p class="text-lg text-gray-700 max-w-4xl mx-auto mb-12">以下是一些有用的外部連結，可以幫助您更深入地了解 FIRST 及其提供的機會：</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <a href="https://www.firstinspires.org/" target="_blank" rel="noopener noreferrer" class="resource-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#34568B]">FIRST 官方網站</h3>
+                        <p class="text-gray-700">探索 FIRST 的官方主頁，了解最新資訊、賽事詳情和全球社群。</p>
+                    </a>
+                    <a href="https://www.firstinspires.org/robotics/frc" target="_blank" rel="noopener noreferrer" class="resource-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#34568B]">FIRST Robotics Competition (FRC)</h3>
+                        <p class="text-gray-700">深入了解 FRC 賽事，包括規則、過往賽季和團隊資源。</p>
+                    </a>
+                    <a href="https://www.firstinspires.org/robotics/ftc" target="_blank" rel="noopener noreferrer" class="resource-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#34568B]">FIRST Tech Challenge (FTC)</h3>
+                        <p class="text-gray-700">了解 FTC 賽事的更多資訊，包括團隊組建和機器人建造指南。</p>
+                    </a>
+                    <a href="https://www.firstlegoleague.org/" target="_blank" rel="noopener noreferrer" class="resource-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#34568B]">FIRST LEGO League (FLL)</h3>
+                        <p class="text-gray-700">探索 FLL 專案，適合年齡較小的學生，透過 LEGO 學習 STEM。</p>
+                    </a>
+                     <a href="https://www.firstinspires.org/alumni" target="_blank" rel="noopener noreferrer" class="resource-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#34568B]">FIRST 校友社群</h3>
+                        <p class="text-gray-700">與全球 FIRST 校友網絡建立聯繫，尋求職業發展和指導機會。</p>
+                    </a>
+                    <a href="https://www.firstinspires.org/scholarships" target="_blank" rel="noopener noreferrer" class="resource-card bg-white p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 flex flex-col items-center justify-center text-center">
+                        <h3 class="text-xl font-bold mb-2 text-[#34568B]">獎學金機會</h3>
+                        <p class="text-gray-700">了解參與 FIRST 後可以申請的大學獎學金資訊。</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-[#2C3E50] text-white py-8">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-lg mb-4">準備好迎接挑戰了嗎？</p>
+            <a href="https://www.firstinspires.org/" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#F9A825] text-white font-bold py-3 px-8 rounded-full hover:bg-[#E89A20] transition-colors duration-300 transform hover:scale-105 shadow-lg">
+                訪問 FIRST 官方網站
+            </a>
+            <p class="mt-6 text-sm text-gray-400">這是一個基於 FIRST 公開資訊製作的介紹性網頁。</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Mobile menu toggle functionality
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Smooth scroll for mobile menu links
+            mobileMenu.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden'); // Hide menu after clicking a link
+                });
+            });
+
+            // Mobile Resources Dropdown Toggle (Accordion style)
+            const mobileResourcesToggle = document.getElementById('mobile-resources-toggle');
+            const mobileResourcesSubmenu = document.getElementById('mobile-resources-submenu');
+            const mobileResourcesArrow = document.getElementById('mobile-resources-arrow');
+
+            if (mobileResourcesToggle) {
+                mobileResourcesToggle.addEventListener('click', (e) => {
+                    e.preventDefault(); // Prevent default link behavior if it's a direct link
+                    mobileResourcesSubmenu.classList.toggle('hidden');
+                    mobileResourcesArrow.classList.toggle('rotate-180'); // Rotate arrow for visual feedback
+                });
+            }
+
+            // Tab switching functionality for Core Spirit section
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Deactivate all tabs and their content
+                    tabs.forEach(t => {
+                        // Reset active and hover styles for tabs
+                        t.classList.remove('active', 'bg-[#34568B]', 'text-white', 'border-[#34568B]');
+                        t.classList.add('text-gray-600', 'border-transparent');
+                    });
+                    tabContents.forEach(content => {
+                        // Hide all tab contents with transition
+                        content.classList.remove('active', 'scale-100', 'opacity-100');
+                        content.classList.add('scale-95', 'opacity-0', 'hidden'); 
+                    });
+                    
+                    // Activate the clicked tab based on provided CSS for active state
+                    tab.classList.add('active', 'bg-[#34568B]', 'text-white');
+                    tab.classList.remove('text-gray-600', 'border-transparent');
+
+
+                    // Show the corresponding content with animation
+                    const target = tab.getAttribute('data-tab');
+                    const activeContent = document.getElementById(target);
+                    if (activeContent) {
+                        activeContent.classList.remove('hidden'); // Remove hidden class before activating
+                        setTimeout(() => { // Small delay to allow CSS transition
+                            activeContent.classList.add('active', 'scale-100', 'opacity-100');
+                            activeContent.classList.remove('scale-95', 'opacity-0');
+                        }, 10); 
+                    }
+                });
+            });
+
+            // Initialize first tab as active with updated active styles
+            if (tabs.length > 0) {
+                tabs[0].classList.add('active', 'bg-[#34568B]', 'text-white');
+                document.getElementById(tabs[0].getAttribute('data-tab')).classList.add('active', 'scale-100', 'opacity-100');
+                document.getElementById(tabs[0].getAttribute('data-tab')).classList.remove('hidden');
+            }
+
+
+            // Chart.js for Competitions Comparison
+            const competitionsCtx = document.getElementById('competitionsChart').getContext('2d');
+            new Chart(competitionsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['機器人平均重量 (kg)', '建議團隊人數'],
+                    datasets: [{
+                        label: 'FRC',
+                        data: [55, 25],
+                        backgroundColor: 'rgba(52, 86, 139, 0.8)', // Primary blue
+                        borderColor: 'rgba(52, 86, 139, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }, {
+                        label: 'FTC',
+                        data: [19, 10],
+                        backgroundColor: 'rgba(249, 168, 37, 0.8)', // Accent yellow
+                        borderColor: 'rgba(249, 168, 37, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }, {
+                        label: 'FLL',
+                        data: [1, 5],
+                        backgroundColor: 'rgba(119, 141, 169, 0.8)', // Neutral blue/grey
+                        borderColor: 'rgba(119, 141, 169, 1)',
+                        borderWidth: 1,
+                        borderRadius: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'FIRST 賽事規模比較',
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            },
+                            color: '#2C3E50'
+                        },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 14
+                                },
+                                color: '#2C3E50'
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed.y !== null) {
+                                        label += context.parsed.y + (context.label.includes('重量') ? ' kg' : ' 人');
+                                    }
+                                    return label;
+                                }
+                            },
+                            titleFont: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 14
+                            },
+                            padding: 10,
+                            boxPadding: 5
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                },
+                                color: '#2C3E50'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                font: {
+                                    size: 12
+                                },
+                                color: '#2C3E50'
+                            }
+                        }
+                    }
+                }
+            });
+
+            // Chart.js for Skills Gained
+            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+            new Chart(skillsCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['工程與技術', '團隊合作與溝通', '解決問題與創新', '領導力與專案管理'],
+                    datasets: [{
+                        label: '技能收穫分佈',
+                        data: [40, 25, 20, 15],
+                        backgroundColor: [
+                            'rgba(52, 86, 139, 0.8)',   // Primary blue
+                            'rgba(249, 168, 37, 0.8)',  // Accent yellow
+                            'rgba(119, 141, 169, 0.8)', // Neutral blue/grey
+                            'rgba(108, 117, 125, 0.8)'  // Darker neutral grey
+                        ],
+                        hoverOffset: 8,
+                        borderColor: 'white',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '在 FIRST 獲得的綜合技能',
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            },
+                            color: '#2C3E50'
+                        },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                font: {
+                                    size: 14
+                                },
+                                color: '#2C3E50',
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    if (context.parsed !== null) {
+                                        label += context.parsed + '%';
+                                    }
+                                    return label;
+                                }
+                            },
+                            titleFont: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                size: 14
+                            },
+                            padding: 10,
+                            boxPadding: 5
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

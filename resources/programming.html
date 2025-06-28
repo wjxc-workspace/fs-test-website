@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FRC & WPILib 學習資源</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&family=Inter:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+    <style>
+      /* Base font styles for Noto Sans TC and Inter, with a fallback */
+      body {
+        font-family: "Noto Sans TC", "Inter", sans-serif;
+        background-color: #F8F7F4; /* Light background from previous page */
+        color: #2C3E50; /* Dark text color from previous page */
+      }
+      /* General card styling for sections, with shadows and transitions */
+      .section-card {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 0.75rem; /* Rounded corners */
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* Default shadow */
+        margin-bottom: 2.5rem;
+        transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
+      }
+      .section-card:hover {
+        box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -2px rgb(0 0 0 / 0.05); /* Larger shadow on hover */
+        transform: translateY(-3px); /* Slightly lift on hover */
+      }
+      /* Styling for resource links */
+      .resource-link {
+        color: #34568B; /* Primary blue from previous page */
+        text-decoration: none;
+        font-weight: 500; /* Medium font weight */
+        transition: color 0.2s ease-in-out, transform 0.2s ease-in-out; /* Smooth transition */
+      }
+      .resource-link:hover {
+        color: #F9A825; /* Accent yellow from previous page on hover */
+        transform: translateX(5px); /* Slightly move right on hover */
+      }
+      /* Specific styling for headings to ensure correct scroll positioning */
+      h2 {
+        scroll-margin-top: 20px;
+      }
+      /* Styling for preformatted code blocks */
+      pre {
+        background-color: #2C3E50; /* Dark background for code from previous page's footer */
+        color: #f8f7f4; /* Light text color for code */
+        padding: 1.5rem;
+        border-radius: 0.5rem;
+        overflow-x: auto; /* Enable horizontal scrolling for long lines */
+        margin-bottom: 1.5rem;
+        font-family: 'Inter', monospace; /* Use Inter for code if available, fallback to monospace */
+      }
+    </style>
+  </head>
+  <body class="text-[#2C3E50]">
+    <!-- Main Content -->
+    <main class="w-full lg:w-4/5 mx-auto px-4 md:px-6 py-12">
+      <!-- FRC 制度與競賽規則介紹 -->
+      <section id="intro" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          1. FRC 制度與競賽規則
+        </h2>
+        <p class="mb-4 text-gray-700 font-bold">
+          FRC 不僅是機器人競賽，更是一個培養 STEM
+          人才、強調團隊合作與運動家精神的國際平台。每年一月，FIRST®
+          都會公布全新的賽季競賽規則 (Game
+          Manual)，隊伍必須在有限時間內打造出能完成挑戰的機器人。
+        </p>
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          <div>
+            <h4 class="font-semibold text-lg text-[#2C3E50]">核心理念</h4>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+              <li>Gracious Professionalism®</li>
+              <li>Coopertition®</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-lg text-[#2C3E50]">賽季流程</h4>
+            <ul class="list-disc list-inside text-gray-700 mt-2 space-y-1">
+              <li>Kickoff (賽季公布)</li>
+              <li>Build Season (搭建期)</li>
+              <li>Competitions (區域/地區賽)</li>
+              <li>Championship (世界總決賽)</li>
+            </ul>
+          </div>
+          <div>
+            <h4 class="font-semibold text-lg text-[#2C3E50]">重要資源</h4>
+            <ul class="list-none mt-2 space-y-2">
+              <li>
+                <a
+                  href="https://www.firstinspires.org/robotics/frc/game-and-season"
+                  target="_blank"
+                  class="resource-link"
+                  ><i class="fas fa-link mr-2"></i>賽季官網</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.firstinspires.org/resource-library/frc/competition-manual-qa-system"
+                  target="_blank"
+                  class="resource-link"
+                  ><i class="fas fa-book mr-2"></i>Game Manual</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://frc-events.firstinspires.org/"
+                  target="_blank"
+                  class="resource-link"
+                  ><i class="fas fa-calendar-alt mr-2"></i>賽事資訊</a
+                >
+              </li>
+              <li>
+                <a
+                  href="https://www.youtube.com/@FIRSTRoboticsCompetition"
+                  target="_blank"
+                  class="resource-link"
+                  ><i class="fab fa-youtube mr-2"></i>官方頻道</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+            <!-- 程式軟體下載與安裝 -->
+      <section id="software" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          2. 程式軟體下載與安裝
+        </h2>
+        <p class="mb-4 text-gray-700">
+          工欲善其事，必先利其器。FRC 程式開發主要使用 VS Code 搭配 WPILib
+          擴充套件，並需安裝 FRC Game Tools 以使用 Driver Station 等工具。
+        </p>
+        <ul class="list-decimal list-inside space-y-3 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">安裝 FRC Game Tools:</strong> 包含
+            Driver Station、roboRIO Imaging Tool
+            等，是與機器人通訊和設定的必備軟體。
+          </li>
+          <li>
+            <strong class="font-semibold">安裝 VS Code & WPILib:</strong> WPILib
+            Installer 會引導安裝 VS Code 及專用擴充套件，提供完整的開發環境。
+          </li>
+          <li>
+            <strong class="font-semibold">安裝 Phoenix Tuner X:</strong> Phoenix Tuner X 
+            提供管理機器人上來自 CTRE 的電子元件的介面，是電路除錯時候的必備工具。
+          </li>
+          <li>
+            <strong class="font-semibold">安裝 REV Harware Client:</strong> REV Hardware Client (RHC)
+            是一款旨在幫助使用者更輕鬆地管理 REV 設備的軟體，是電路除錯時候的必備工具。
+          </li>
+          <li>
+            <strong class="font-semibold">安裝 PathPlanner:</strong> PathPlanner 是由 3015
+            團隊創建的機器人運動軌跡產生器，可以輕鬆建立機器人的自動尋路與生成。
+          </li>
+        </ul>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/frc-game-tools.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-download mr-2"></i>Game Tools 安裝指南</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-2/wpilib-setup.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fab fa-windows mr-2"></i>WPILib 安裝指南</a
+        >
+        <a
+          href="https://apps.microsoft.com/detail/9nvv4pwdw27z?hl=zh-TW&gl=BR"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-cogs mr-2"></i>Phoenix Tuner X</a
+        >
+        <a
+          href="https://docs.revrobotics.com/rev-hardware-client"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-cogs mr-2"></i>REV Hardware Client</a
+        >
+        <a
+          href="https://apps.microsoft.com/detail/9nqbkb5dw909?hl=zh-tw&gl=US"
+          target="_blank"
+          class="resource-link"
+          ><i class="fas fa-route mr-2"></i>PathPlanner</a
+        >
+      </section>
+
+      <!-- 電路結構與常用硬體簡介 -->
+      <section id="hardware" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          3. 電路結構與常用硬體
+        </h2>
+        <p class="mb-4 text-gray-700">
+          穩定可靠的電路是機器人成功的基石。了解核心組件如
+          roboRIO、PDH、馬達控制器等的功能與接線方式至關重要。
+        </p>
+        <ul class="list-disc list-inside space-y-3 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">核心組件:</strong> roboRIO (大腦), PDH
+            (電源), Motor Controllers (驅動)。
+          </li>
+          <li>
+            <strong class="font-semibold">最佳實踐:</strong>
+            遵循官方的接線指南，確保線路整潔、牢固，並做好絕緣保護，避免短路。
+          </li>
+          <li>
+            <strong class="font-semibold">故障排除:</strong> 學會判讀 CAN
+            裝置的狀態指示燈，能快速定位問題。
+          </li>
+        </ul>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/controls-overviews/control-system-hardware.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-microchip mr-2"></i>硬體總覽</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/zero-to-robot/step-1/basic-robot-wiring.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-sitemap mr-2"></i>基礎接線指南</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/hardware/hardware-basics/status-lights-ref.html"
+          target="_blank"
+          class="resource-link"
+          ><i class="fas fa-lightbulb mr-2"></i>狀態燈參考</a
+        >
+      </section>
+
+      <!-- 馬達參數設定與控制實作 -->
+      <section id="motors" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          4. 馬達參數設定與控制
+        </h2>
+        <p class="mb-4 text-gray-700">
+          學會使用 WPILib 提供的 API
+          控制馬達是編程的第一步。從建立專案、宣告馬達物件，到最終將程式碼部署到機器人上，每個環節都需謹慎操作。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          馬達控制器宣告範例 (Java)
+        </h4>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// Phoenix v5
+WPI_TalonSRX motor = new WPI_TalonSRX(0);
+WPI_VictorSPX motor = new WPI_VictorSPX(0);
+
+// Phoenix v6
+TalonFX motor = new TalonFX(0);
+
+// Rev
+SparkMax motor = new SparkMax(0, MotorType.kBrushless);</code></pre>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/basic-programming/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-code mr-2"></i>基礎編程概念</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/using-motor-controllers.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-cogs mr-2"></i>馬達 API</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/vscode-overview/deploying-robot-code.html"
+          target="_blank"
+          class="resource-link"
+          ><i class="fas fa-upload mr-2"></i>部署程式指南</a
+        >
+      </section>
+
+      <!-- 底盤控制實作 -->
+      <section id="drivetrain" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          5. 底盤控制實作
+        </h2>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          DifferentialDrive 類別說明
+        </h4>
+        <p class="mb-4 text-gray-700">
+          WPILib 提供了 `DifferentialDrive`
+          輔助類別，它大大簡化了差速驅動底盤的程式編寫。這個類別會處理左右兩側馬達速度的計算，你只需要提供前進、後退和轉向的指令即可。初始化時，你需要提供左右兩側的馬達控制器物件。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          完整 Arcade Drive 範例 (Java)
+        </h4>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>WPI_TalonSRX leftMotor = new WPI_TalonSRX(0);
+WPI_TalonSRX rightMotor = new WPI_TalonSRX(1);
+
+DifferentialDrive drive = new DifferentialDrive(leftMotor, rightMotor);
+
+XboxController controller = new XboxController(0);
+
+public Robot() {
+    // 一側馬達需反轉，確保兩側同步前進
+    leftMotor.setInverted(false);
+    rightMotor.setInverted(true);
+}
+
+@Override
+public void teleopPeriodic() {
+    // 使用 Xbox 搖桿的左 Y 軸控制前進後退，右 X 軸控制轉向乘以 0.5 進行降速
+    drive.arcadeDrive(
+        -controller.getLeftY() * 0.5,
+        -controller.getRightX() * 0.5
+    );
+}
+</code></pre>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/hardware-apis/motors/wpi-drive-classes.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-car-side mr-2"></i>Differential Drive 教學</a
+        >
+        <a
+          href="https://www.youtube.com/watch?v=ihO-mw_4Qpo"
+          target="_blank"
+          class="resource-link"
+          ><i class="fab fa-youtube mr-2"></i>Arcade Drive 影片教學</a
+        >
+      </section>
+
+      <!-- 儀表板與NetworkTables資料傳輸實作 -->
+      <section id="networktables" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          6. 儀表板與NetworkTables資料傳輸
+        </h2>
+        <p class="mb-4 text-gray-700">
+          NetworkTables 是 FRC 機器人與 Driver Station
+          或自定義儀表板之間進行數據傳輸的核心機制。它允許機器人將感測器數據、狀態信息等發送到操作員介面，同時也能從介面接收指令。這對於調試、監控機器人狀態以及實現自動模式選擇等功能至關重要。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">常用儀表板工具</h4>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">Shuffleboard:</strong> WPILib
+            推薦的儀表板工具，提供豐富的組件和高度自定義的能力，可以用來顯示各種數據、調整常數、選擇自動模式等。
+          </li>
+          <li>
+            <strong class="font-semibold">SmartDashboard:</strong>
+            一個較為簡單的儀表板，易於上手，適合快速顯示少量數據和基本控制。
+          </li>
+          <li>
+            <strong class="font-semibold">Elastic:</strong>
+            用於視覺化和分析機器人運行數據的強大工具，特別適合賽後數據分析和長期性能追蹤。
+          </li>
+        </ul>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          NetworkTables 數據發布範例 (Java)
+        </h4>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// SmartDashboard 範例
+@Override
+public void robotPeriodic() {
+    // 假設 getPosition() 方法返回一個 double 值，該值應來自 CANCoder
+    SmartDashboard.putNumber("position", getPosition());
+}
+
+// NetworkTables4.0 (NT4) publisher 範例
+// 初始化時宣告 publisher
+DoublePublisher publisher = NetworkTableInstance.getDefault()
+    .getTable("chassis").getDoubleTopic("left_motor_position").publish();
+
+@Override
+public void robotPeriodic() {
+    // 假設 getLeftMotorPosition() 方法返回一個 double 值，該值應來自 CANCoder
+    publisher.set(getPosition());
+}
+</code></pre>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/networktables/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-network-wired mr-2"></i>NetworkTables 詳細說明</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/dashboards/shuffleboard/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-chart-bar mr-2"></i>Shuffleboard 介紹</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/dashboards/smartdashboard/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-tachometer-alt mr-2"></i>SmartDashboard 介紹</a
+        >
+        <a
+          href="https://frc-elastic.gitbook.io/docs"
+          target="_blank"
+          class="resource-link"
+          ><i class="fas fa-chart-line mr-2"></i>Elastic 官方文件</a
+        >
+      </section>
+
+      <!-- PID 控制原理與實作 -->
+      <section id="pid" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          7. PID 控制原理與實作
+        </h2>
+        <p class="mb-4 text-gray-700">
+          PID (比例-積分-微分) 控制器是工業控制系統中最常用的反饋控制器之一，在
+          FRC
+          機器人中廣泛應用於精確控制馬達位置、速度、角度等。理解其原理並妥善調校參數
+          (Kp, Ki, Kd) 對於實現穩定且精確的機器人動作至關重要。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          PID 各項參數說明
+        </h4>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">比例 (Proportional, Kp):</strong>
+            響應當前誤差。Kp 越大，響應越快，但過大可能導致震盪。
+          </li>
+          <li>
+            <strong class="font-semibold">積分 (Integral, Ki):</strong>
+            消除穩態誤差 (Steady-state
+            error)。累積過去的誤差，有助於消除系統的長期偏差，但過大可能導致超調和不穩定。
+          </li>
+          <li>
+            <strong class="font-semibold">微分 (Derivative, Kd):</strong>
+            抑制變化率。響應誤差的變化趨勢，有助於減緩系統的響應速度，減少超調和震盪，但對噪音敏感。
+          </li>
+        </ul>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          PID 控制器範例 (Java)
+        </h4>
+        <h5 class="font-semibold text-md text-gray-700 mb-2">
+          自定義 PID 實現
+        </h5>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// 簡易自定義 PID 類別範例
+public class CustomPIDController {
+    private double kp, ki, kd;
+    private double i = 0;
+    private double lastError = 0;
+
+    public CustomPIDController(double p, double i, double d) {
+        this.kp = p;
+        this.ki = i;
+        this.kd = d;
+    }
+
+    public double calculate(double error) {
+        double pOut = kp * error;
+        i += error; // 積分項，i 代表誤差的累計
+        double iOut = ki * i;
+        double dOut = kd * (error - lastError);
+        lastError = error;
+        return pOut + iOut + dOut;
+    }
+
+    public void reset() {
+        i = 0;
+        lastError = 0;
+    }
+}</code></pre>
+        <h5 class="font-semibold text-md text-gray-700 mb-2">
+          使用自定義 PID
+        </h5>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// 在 Robot.java 或其他類別中如何使用
+private CustomPIDController myPid = new CustomPIDController(0.1, 0.01, 0.005);
+private double targetValue = 10.0;
+@Override
+public void teleopPeriodic() {
+    double currentValue = getSensorValue(); // 獲取當前感測器值，應來自 CANCoder
+    double error = targetValue - currentValue;
+    double output = myPid.calculate(error);
+    motor.set(output);
+}
+</code></pre>
+        <p class="mb-4 text-gray-700">
+          WPILib 內建的 PIDController 類別可以輕鬆地實現 PID 控制。
+        </p>
+        <h5 class="font-semibold text-md text-gray-700 mb-2">
+          WPILib PIDController 實現
+        </h5>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// 在 Robot.java 或 Subsystem 中
+private final double kP = 0.1; // 比例常數
+private final double kI = 0.01; // 積分常數
+private final double kD = 0.005; // 微分常數
+
+private final PIDController chassisPID = new PIDController(kP, kI, kD);
+private final SparkMax motor = new SparkMax(0, MotorType.kBrushless); // 假設有一個馬達實例
+private final CANCoder currentPositionCANCoder = new CANCoder(42); // 假設有一個 CANCoder 實例
+
+// 執行 PID 控制的方法
+void run(double setpoint) {
+    chassisPID.setSetpoint(setpoint); // 設定目標值
+    // 假設 currentPosition 是你想要控制的物理量（例如：CANCoder 的讀數）
+    motor.set(chassisPID.calculate(currentPositionCANCoder.getPosition())); // 將 PID 輸出應用到馬達
+}
+
+// 範例使用
+@Override
+public void teleopPeriodic() {
+    // 假設你想讓底盤移動到某個位置或轉到某個角度
+    double targetPosition = getControllerInput(); // 從搖桿或其他輸入獲取目標
+    run(targetPosition);
+}
+</code></pre>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-cogs mr-2"></i>進階控制介紹</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/advanced-controls/introduction/introduction-to-pid.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-wrench mr-2"></i>PID 控制器介紹</a
+        >
+        <a
+          href="https://www.youtube.com/watch?v=P12UqD-j_jM"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fab fa-youtube mr-2"></i>PID 影片教學 (中文)</a
+        >
+        <a
+          href="https://www.youtube.com/watch?v=qKy98Cbcltw"
+          target="_blank"
+          class="resource-link"
+          ><i class="fab fa-youtube mr-2"></i>PID 影片教學 (英文)</a
+        >
+      </section>
+
+      <!-- 底盤自動 (Auto) 實作與里程計 (Odometry) 使用 -->
+      <section id="autonomous" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          8. 底盤自動 (Auto) 實作與里程計 (Odometry)
+        </h2>
+        <p class="mb-4 text-gray-700">
+          自動模式 (Autonomous Mode) 是 FRC
+          競賽的關鍵環節，機器人在沒有人類操作的情況下，根據預設程式完成任務。WPILib
+          的 Command-Based 框架是實現自動模式的推薦方式。里程計 (Odometry)
+          則是追蹤機器人在場地上位置的重要技術，它結合了編碼器和陀螺儀等感測器數據，提供機器人的即時位置和方向。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          自動模式實作流程
+        </h4>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">建立命令 (Commands):</strong>
+            將機器人動作 (例如：驅動特定距離、轉彎、舉升機械臂) 封裝成獨立的
+            Command 物件。
+          </li>
+          <li>
+            <strong class="font-semibold">命令群組 (Command Groups):</strong>
+            將多個 Commands 組合成序列或並行執行，以完成更複雜的自動任務。
+          </li>
+          <li>
+            <strong class="font-semibold"
+              >自動選擇器 (Autonomous Chooser):</strong
+            >
+            利用 Shuffleboard 或 SmartDashboard
+            讓操作員在比賽前選擇不同的自動模式。
+          </li>
+        </ul>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          里程計 (Odometry) 概念
+        </h4>
+        <p class="mb-4 text-gray-700">
+          里程計通過集成機器人輪子的運動數據（通常來自編碼器）和方向數據（通常來自陀螺儀）來估計機器人在場地上的位置。WPILib
+          提供了 `DifferentialDriveOdometry` 等類別來實現這一功能，配合
+          `Field2d` Widget 可以在儀表板上實時顯示機器人的位置。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          Odometry 與 Field2d 範例 (Java)
+        </h4>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>private final CANCoder m_leftCANCoder = new CANCoder(0); // 假設左側 CANCoder ID 為 0
+private final CANCoder m_rightCANCoder = new CANCoder(1); // 假設右側 CANCoder ID 為 1
+private final Pigeon2 m_gyro = new Pigeon2(42); // 陀螺儀
+private final DifferentialDriveOdometry m_odometry;
+private final Field2d m_field = new Field2d(); // 用於在 Shuffleboard 上顯示機器人位置
+
+public Robot() {
+    // 重置編碼器和陀螺儀
+    m_leftCANCoder.setPosition(0);
+    m_rightCANCoder.setPosition(0);
+    m_gyro.reset();
+
+    // 初始化里程計，設定初始位置 (0,0) 和方向 (0度)
+    m_odometry = new DifferentialDriveOdometry(
+        m_gyro.getYaw(),
+        m_leftCANCoder.getPosition(), // 使用 CANCoder 的位置
+        m_rightCANCoder.getPosition() // 使用 CANCoder 的位置
+    );
+
+    // 將 Field2d widget 發布到 SmartDashboard
+    SmartDashboard.putData("Field", m_field);
+}
+
+@Override
+public void robotPeriodic() {
+    // 每次週期更新里程計
+    m_odometry.update(
+        m_gyro.Yaw(),
+        m_leftCANCoder.getPosition(), // 使用 CANCoder 的位置
+        m_rightCANCoder.getPosition() // 使用 CANCoder 的位置
+    );
+
+    // 獲取當前機器人位置並顯示在 Field2d 上
+    m_field.setRobotPose(m_odometry.getPoseMeters());
+
+    // 也可以將位置數據單獨發布
+    SmartDashboard.putNumber("Robot X", m_odometry.getPoseMeters().getX());
+    SmartDashboard.putNumber("Robot Y", m_odometry.getPoseMeters().getY());
+    SmartDashboard.putNumber("Robot Angle", m_odometry.getPoseMeters().getRotation().getDegrees());
+}
+</code></pre>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/dashboards/smartdashboard/choosing-an-autonomous-program-from-smartdashboard.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-robot mr-2"></i>自動模式選擇器</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-map-marked-alt mr-2"></i>運動學與里程計</a
+        >
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/dashboards/glass/field2d-widget.html"
+          target="_blank"
+          class="resource-link"
+          ><i class="fas fa-globe-americas mr-2"></i>Field2d 顯示</a
+        >
+      </section>
+
+      <!-- Command-Based Project 介紹 -->
+      <section id="command-based" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          9. Command-Based Project 介紹
+        </h2>
+        <p class="mb-4 text-gray-700">
+          WPILib 的 Command-Based 框架是 FRC
+          程式開發的推薦模式，它將機器人的功能模組化為「子系統
+          (Subsystems)」和「命令
+          (Commands)」。這種設計模式有助於提高程式碼的可讀性、可維護性和協作效率，特別適合複雜的機器人專案。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">核心概念</h4>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">Subsystem (子系統):</strong>
+            代表機器人的一個獨立功能模組（例如：底盤、機械臂、發射器）。子系統負責管理其硬體（馬達、感測器）並提供執行特定動作的方法。每個子系統應該是自包含的，並且不應該直接依賴其他子系統。
+          </li>
+          <li>
+            <strong class="font-semibold">Command (命令):</strong>
+            代表一個需要機器人執行的動作（例如：驅動前進、舉升機械臂、射擊）。命令可以由操作員輸入觸發，也可以在自動模式中按序執行。命令可以要求一個或多個子系統，確保在命令執行期間，這些子系統不會被其他命令干擾。
+          </li>
+          <li>
+            <strong class="font-semibold"
+              >Command Scheduler (命令排程器):</strong
+            >
+            負責管理所有命令的執行，包括啟動、停止、中斷和協調命令之間的衝突。它會在每個機器人週期中運行，檢查哪些命令需要執行。
+          </li>
+        </ul>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">Subsystems</h4>
+        <p class="mb-4 text-gray-700">
+          Subsystem 是一個獨立的功能模組，例如底盤、機械臂等。每個子系統都應該是自包含的，不應該直接依賴其他子系統。在下面的範例中，
+          我們將先前寫在 Robot.java 中的 Tank Drive 程式整合在一個獨立的 Drive Subsystem 中。Subsystem 包含兩種方法：
+        </p>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">periodic:</strong>
+            與 Robot.java 中的 robotPeriodic 類似，periodic 方法在每個機器人週期中 (不論機器人是否啟動) 都會執行。
+          </li>
+          <li>
+            <strong class="font-semibold">simulationPeriodic:</strong>
+            這是一個高階的方法，只在機器人在模擬模式 (simulation) 下執行。這個方法通常用於在模擬中模擬機器人的動作，
+            例如更新模擬中的馬達速度、機械臂位置等。
+          </li>
+        </ul>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// DriveSubsystem.java
+// 範例：一個簡單的底盤子系統 (Drivetrain Subsystem)
+public class Drivetrain extends SubsystemBase {
+    // 宣告馬達和 CANCoder 等硬體
+    private final WPI_TalonSRX m_leftMotor = new WPI_TalonSRX(0);
+    private final WPI_TalonSRX m_rightMotor = new WPI_TalonSRX(1);
+    private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotor, m_rightMotor);
+    private final CANCoder m_leftCANCoder = new CANCoder(2); // 左側 CANCoder
+    private final CANCoder m_rightCANCoder = new CANCoder(3); // 右側 CANCoder
+
+    public Drivetrain() {
+        // 設定馬達反轉等初始化操作
+    }
+
+    // 提供控制底盤的方法
+    public void arcadeDrive(double xSpeed, double zRotation) {
+        m_drive.arcadeDrive(xSpeed, zRotation);
+    }
+
+    // 獲取感測器數據的方法
+    public double getLeftCANCoderPosition() {
+        return 0.0; // 實際應返回 CANCoder 位置
+        return m_leftCANCoder.getPosition();
+    }
+
+    public double getAverageCANCoderDistance() {
+        // 實際應返回左右 CANCoder 的平均距離
+        return (m_leftCANCoder.getPosition() + m_rightCANCoder.getPosition()) / 2.0;
+    }
+
+    public void resetCANCoders() {
+        // 重置 CANCoder
+        m_leftCANCoder.setPosition(0);
+        m_rightCANCoder.setPosition(0);
+    }
+
+    @Override
+    public void periodic() {
+        // 這個方法會在每個機器人週期中被調用
+        // 可以用於更新 SmartDashboard 數據或執行其他週期性任務
+    }
+}
+</code></pre>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">Commnads</h4>
+        <p class="mb-4 text-gray-700">
+          Command (命令)是一個機器人的動作單位，可以同時包含多個 Subsystem，形成多個
+          Subsystem 的協同運作。一個 Command 包含三個主要部分：initialize、execute 和
+          end，以及一個可選的 isFinished 方法。
+        </p>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">initialize:</strong>
+            代表一個需要在機器人啟動時執行的動作（例如：初始化子系統、設定初始狀態）。
+            initialize 只會在 Command 被加入排程時時執行一次。
+          </li>
+          <li>
+            <strong class="font-semibold">execute:</strong>
+            代表一個需要機器人執行的動作（例如：前進、降低機械臂）。在
+            execute 中的指令位一直執行，直到 isFinished 返回 true。
+          </li>
+          <li>
+            <strong class="font-semibold">end:</strong>
+            代表一個需要機器人結束的動作（例如：停止前進、降低機械臂）。
+            end 只會在 Command 結束時才會執行一次。
+          </li>
+          <li>
+            <strong class="font-semibold">isFinished:</strong>
+            用於檢查 Command 是否已完成。如果 Command 已完成，返回 true，否則返回 false。
+          </li>
+        </ul>
+        <p class="mb-4 text-gray-700">
+          我們可以前一個章節的底盤自動模式範例作為 Commnad 的例子。在這個範例中，首先在
+          initialize 中重設了編碼器位置和 PID 控制器，然後在 execute 中使用 PID 控制器計算馬達的輸出，最後當
+          isFinished 返回 true，也就是機器人位置與目標位置在誤差範圍內時，命令結束，並在
+          end 中停止馬達。
+        </p>
+        <pre 
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// DriveForwardCommand.java
+// 範例：一個簡單的自動模式命令 (DriveForwardCommand)
+public class DriveForwardCommand extends Command {
+    private final DifferentialDriveSubsystem m_drivetrain; // 假設你已經有一個底盤 Subsystem
+    private final double m_distance;
+    private final PIDController m_distancePid = new PIDController(0.1, 0, 0);
+
+    public DriveForwardCommand(DifferentialDriveSubsystem drivetrain, double distance) {
+        m_drivetrain = drivetrain;
+        m_distance = distance;
+        addRequirements(m_drivetrain);
+        // 將底盤 Subsystem 加入命令的需求，使 Command Scheduler 可以協調不同的命令
+        // 避免同時有不同命令控制同一個馬達的狀況
+        m_distancePid.setSetpoint(distance);
+    }
+
+    @Override
+    public void initialize() {
+        m_drivetrain.resetEncoders(); // 重置編碼器 (應包含 CANCoder 重置)
+        m_distancePid.reset();
+    }
+
+    @Override
+    public void execute() {
+        double output = m_distancePid.calculate(m_drivetrain.getAverageEncoderDistance());
+        // getAverageEncoderDistance 應使用 CANCoder
+        m_drivetrain.arcadeDrive(output, 0); // 往前開
+    }
+
+    @Override
+    public boolean isFinished() {
+        return Math.abs(m_distancePid.getPositionError()) < 0.05; // 到達目標距離
+    }
+
+    @Override
+    public void end(boolean interrupted) {
+        m_drivetrain.stop();
+    }
+}
+</code></pre>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/commandbased/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-puzzle-piece mr-2"></i>Command-Based Programming</a
+        >
+        <a
+          href="https://www.youtube.com/watch?v=VoxeXqy1bdQ"
+          target="_blank"
+          class="resource-link"
+          ><i class="fab fa-youtube mr-2"></i>Command-Based 影片教學</a
+        >
+      </section>
+
+      <!-- 多子系統協作型自動實作 -->
+      <section id="multi-subsystem-auto" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          10. 多子系統協作型自動實作
+        </h2>
+        <p class="mb-4 text-gray-700">
+          自動模式 (Autonomous) 通常涉及多個子系統協同工作以完成一系列任務。在
+          Command-Based 框架中，這可以通過命令群組 (Command Groups) 實現，例如
+          `SequentialCommandGroup`（依序執行）和
+          `ParallelCommandGroup`（並行執行）。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          自動模式命令群組範例 (Java)
+        </h4>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// 假設你已經有 Drivetrain 和 Turret 子系統的實例，以及 DriveForward 和 TurnTurretToAngle 命令
+
+public class ComplexAutonomous extends SequentialCommandGroup {
+    /**
+     * 創建一個複雜的自動模式，包含驅動、轉向和砲台操作。
+     * @param drivetrain 底盤子系統
+     * @param turret 砲台子系統
+     */
+    public ComplexAutonomous(Drivetrain drivetrain, Turret turret) {
+        addCommands(
+            // 步驟 1: 往前驅動 2 公尺
+            new DriveForward(drivetrain, 2.0),
+            new WaitCommand(0.5), // 等待 0.5 秒
+
+            // 步驟 2: 同時驅動底盤轉彎並旋轉砲台
+            new ParallelCommandGroup(
+                new DriveForward(drivetrain, 1.0).withTimeout(2.0), // 驅動 1 公尺，最多 2 秒
+                new TurnTurretToAngle(turret, 90.0) // 砲台旋轉到 90 度
+            ),
+            new WaitCommand(0.5), // 等待 0.5 秒
+
+            // 步驟 3: 砲台歸零並後退
+            new ParallelCommandGroup(
+                new TurnTurretToAngle(turret, 0.0), // 砲台歸零
+                new DriveForward(drivetrain, -1.0) // 後退 1 公尺
+            )
+        );
+    }
+}
+
+// 在 Robot.java 的 autonomousInit() 中使用
+private ComplexAutonomous m_autonomousCommand;
+@Override
+public void autonomousInit() {
+    m_autonomousCommand = new ComplexAutonomous(m_drivetrain, m_turret);
+    if (m_autonomousCommand != null) {
+        m_autonomousCommand.schedule();
+    }
+}
+</code></pre>
+        <p class="mb-4 text-gray-700 mt-6">
+          通過組合不同的命令，可以構建出各種複雜的自動模式行為，以應對不同的競賽策略。這種模組化的方法使得自動程式的開發和調試變得更加高效。
+        </p>
+      </section>
+
+      <!-- Advantage Scope 展示與簡介 -->
+      <section id="advantage-scope" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          11. AdvantageScope 展示與簡介
+        </h2>
+        <p class="mb-4 text-gray-700">
+          AdvantageScope 是一個由 FRC Team 6328 (Mechanical Advantage)
+          開發的強大數據視覺化工具，它基於 NetworkTables 協議，提供了比
+          Shuffleboard 和 SmartDashboard
+          更豐富的功能。它特別擅長於實時繪製圖表、3D
+          視覺化機器人軌跡和狀態，以及回放比賽日數據，對於調試、分析和優化機器人性能極為有用。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">主要功能與優勢</h4>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">實時數據視覺化:</strong>
+            能夠以圖表、3D 模型等形式實時顯示來自機器人的各種數據。
+          </li>
+          <li>
+            <strong class="font-semibold">數據記錄與回放:</strong>
+            可以記錄機器人運行時的所有 NetworkTables
+            數據，並在之後進行回放和詳細分析，這對於故障排除和賽後檢討非常有幫助。
+          </li>
+          <li>
+            <strong class="font-semibold">3D 場地視覺化 (Field2d):</strong>
+            結合里程計數據，可以在 3D 場景中顯示機器人的實時位置和運動軌跡。
+          </li>
+          <li>
+            <strong class="font-semibold">可自定義儀表板:</strong>
+            靈活的介面佈局和多種數據顯示組件，滿足不同調試需求。
+          </li>
+          <li>
+            <strong class="font-semibold">對 PathPlanner 的良好支持:</strong>
+            可以直接載入 PathPlanner 生成的路徑並在 3D 場地中預覽。
+          </li>
+        </ul>
+        <p class="mb-4 text-gray-700">
+          AdvantageScope
+          的使用入門相對簡單，只需下載並運行軟體，它會自動連接到機器人的
+          NetworkTables。對於進階的數據分析和視覺化，它提供了豐富的配置選項。
+        </p>
+        <a
+          href="https://docs.advantagescope.org/"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-chart-area mr-2"></i>AdvantageScope 文件</a
+        >
+        <a
+          href="https://github.com/Mechanical-Advantage/AdvantageScope"
+          target="_blank"
+          class="resource-link"
+          ><i class="fab fa-github mr-2"></i>AdvantageScope GitHub</a
+        >
+      </section>
+
+      <!-- Swerve 原理與範例 -->
+      <section id="swerve" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          12. Swerve 原理與範例
+        </h2>
+        <p class="mb-4 text-gray-700">
+          Swerve Drive (全向轉向驅動) 是 FRC
+          中一種先進的底盤類型，每個輪子都可以獨立轉向和驅動，從而實現完全的平移和旋轉運動，使機器人能夠在場地上進行更靈活的移動。與傳統的
+          Tank Drive 或 Mecanum Drive 相比，Swerve Drive
+          提供了無與倫比的機動性，但也增加了機械和程式設計的複雜性。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          Swerve 核心原理
+        </h4>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">獨立輪模組:</strong>
+            每個輪子都是一個獨立的模組，包含一個驅動馬達和一個轉向馬達。
+          </li>
+          <li>
+            <strong class="font-semibold">運動學 (Kinematics):</strong>
+            根據機器人整體所需的速度和旋轉，計算出每個輪子應有的速度和轉向角度。WPILib
+            提供了 `SwerveDriveKinematics` 類別來處理這些計算。
+          </li>
+          <li>
+            <strong class="font-semibold">里程計 (Odometry):</strong>
+            結合每個輪子的編碼器數據和陀螺儀數據，精確追蹤機器人在場地上的位置和方向。WPILib
+            的 `SwerveDriveOdometry` 類別用於此目的。
+          </li>
+          <li>
+            <strong class="font-semibold">閉迴路控制:</strong>
+            每個輪模組的轉向馬達和驅動馬達都需要精確的 PID
+            閉迴路控制，以確保它們達到目標角度和速度。
+          </li>
+        </ul>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          Swerve 範例程式碼結構 (Java)
+        </h4>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// 範例：一個 Swerve 模組（單個輪子）
+public class SwerveModule extends SubsystemBase {
+    private final CANSparkMax m_driveMotor;
+    private final CANSparkMax m_steerMotor;
+    private final CANCoder m_steerCANCoder; // 使用 CANCoder 作為轉向絕對編碼器
+
+    private final PIDController m_steerPIDController; // 轉向 PID
+    private final ProfiledPIDController m_drivePIDController; // 驅動 PID (可選)
+
+    public SwerveModule(int driveMotorID, int steerMotorID, int steerCANCoderID) {
+        // 初始化馬達和 CANCoder
+        m_driveMotor = new CANSparkMax(driveMotorID, MotorType.kBrushless);
+        m_steerMotor = new CANSparkMax(steerMotorID, MotorType.kBrushless);
+        m_steerCANCoder = new CANCoder(steerCANCoderID);
+
+        // 初始化 PID 控制器
+        m_steerPIDController = new PIDController(kP, kI, kD);
+        m_steerPIDController.enableContinuousInput(-Math.PI, Math.PI); // 角度連續性
+    }
+
+    /**
+     * 設定 Swerve 模組的目標狀態 (速度和角度)。
+     * @param desiredState 目標 SwerveModuleState
+     */
+    public void setDesiredState(SwerveModuleState desiredState) {
+        // 計算轉向馬達的 PID 輸出
+        double steerOutput = m_steerPIDController.calculate(m_steerCANCoder.getPosition(), desiredState.angle.getRadians());
+        m_steerMotor.set(steerOutput);
+
+        // 設定驅動馬達的速度 (通常直接設定為所需速度)
+        m_driveMotor.set(desiredState.speedMetersPerSecond);
+    }
+
+    /**
+     * 獲取當前 Swerve 模組的狀態。
+     * @return 當前 SwerveModuleState
+     */
+    public SwerveModuleState getState() {
+        return new SwerveModuleState(m_driveMotor.getEncoder().getVelocity(), new Rotation2d(m_steerCANCoder.getPosition()));
+    }
+
+    /**
+     * 獲取當前 Swerve 模組的位置（包含距離和角度）。
+     * @return 當前 SwerveModulePosition
+     */
+    public SwerveModulePosition getPosition() {
+        return new SwerveModulePosition(m_driveMotor.getEncoder().getPosition(), new Rotation2d(m_steerCANCoder.getPosition()));
+    }
+
+    @Override
+    public void periodic() {
+        // 更新儀表板數據等
+    }
+}
+
+// 範例：Swerve 底盤子系統
+public class SwerveDrivetrain extends SubsystemBase {
+    private final SwerveModule m_frontLeft = new SwerveModule(..., ..., ...);
+    private final SwerveModule m_frontRight = new SwerveModule(..., ..., ...);
+    private final SwerveModule m_rearLeft = new SwerveModule(..., ..., ...);
+    private final SwerveModule m_rearRight = new SwerveModule(..., ..., ...);
+
+    private final CANCoder m_gyro = new CANCoder(...);
+
+    private final SwerveDriveKinematics m_kinematics;
+    private final SwerveDriveOdometry m_odometry;
+
+    public SwerveDrivetrain() {
+        // 定義輪子在機器人中心坐標系中的位置
+        Translation2d frontLeftLocation = new Translation2d(0.381, 0.381); // 例如：X=0.381m, Y=0.381m
+        // ... 其他輪子位置
+
+        m_kinematics = new SwerveDriveKinematics(frontLeftLocation, ...);
+        m_odometry = new SwerveDriveOdometry(m_kinematics, m_gyro.getRotation2d(),
+            new SwerveModulePosition[] {
+                m_frontLeft.getPosition(), m_frontRight.getPosition(), m_rearLeft.getPosition(), m_rearRight.getPosition()
+            }, new Pose2d());
+    }
+
+    /**
+     * 驅動 Swerve 底盤。
+     * @param xSpeed 機器人前進/後退速度（米/秒）
+     * @param ySpeed 機器人左右平移速度（米/秒）
+     * @param rot 機器人旋轉速度（弧度/秒）
+     * @param fieldRelative 是否為場地相對移動
+     */
+    public void drive(double xSpeed, double ySpeed, double rot, boolean fieldRelative) {
+        SwerveModuleState[] swerveModuleStates = m_kinematics.toSwerveModuleStates(
+            fieldRelative ? ChassisSpeeds.fromFieldRelativeSpeeds(xSpeed, ySpeed, rot, m_gyro.getRotation2d())
+                          : new ChassisSpeeds(xSpeed, ySpeed, rot)
+        );
+
+        SwerveDriveKinematics.desaturateWheelSpeeds(swerveModuleStates, kMaxSpeed); // 解飽和速度
+
+        m_frontLeft.setDesiredState(swerveModuleStates[0]);
+        // ... 為其他模組設定狀態
+    }
+
+    /**
+     * 獲取機器人當前姿勢 (Pose2d)。
+     * @return 機器人當前姿勢
+     */
+    public Pose2d getPose() {
+        return m_odometry.getPoseMeters();
+    }
+
+    /**
+     * 獲取 Swerve 運動學。
+     * @return SwerveDriveKinematics 實例
+     */
+    public SwerveDriveKinematics getKinematics() {
+        return m_kinematics;
+    }
+
+    /**
+     * 設定 Swerve 模組狀態。
+     * @param desiredStates 目標 SwerveModuleState 陣列
+     */
+    public void setModuleStates(SwerveModuleState[] desiredStates) {
+        m_frontLeft.setDesiredState(desiredStates[0]);
+        // ... 設定其他模組
+    }
+
+    @Override
+    public void periodic() {
+        // 更新里程計
+        m_odometry.update(m_gyro.getRotation2d(),
+            new SwerveModulePosition[] {
+                m_frontLeft.getPosition(), m_frontRight.getPosition(), m_rearLeft.getPosition(), m_rearRight.getPosition()
+            });
+        SmartDashboard.putData("Field", m_field); // 將機器人位置顯示在 Field2d 上
+    }
+}
+</code></pre>
+        <a
+          href="https://docs.wpilib.org/en/stable/docs/software/kinematics-and-odometry/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-arrows-alt mr-2"></i>WPILib 運動學與里程計</a
+        >
+        <a
+          href="https://raidzero-swerve-docs.readthedocs.io/en/latest/index.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-book-open mr-2"></i>4253 Swerve 文件</a
+        >
+        <a
+          href="https://wjxc-workspace.github.io/Swerve_Kinematics_Visualizer/"
+          target="_blank"
+          class="resource-link"
+          ><i class="fas fa-eye mr-2"></i>Swerve 運動學視覺化</a
+        >
+      </section>
+
+      <!-- PathPlanner 與 PathPlannerLib 使用 -->
+      <section id="pathplanner" class="section-card">
+        <h2 class="text-3xl font-bold mb-6 border-l-4 border-[#34568B] pl-4">
+          13. PathPlanner 與 PathPlannerLib 使用
+        </h2>
+        <p class="mb-4 text-gray-700">
+          PathPlanner 是一個強大且廣受 FRC
+          社群歡迎的工具，用於設計機器人在自動模式下的路徑。它包括一個直觀的 GUI
+          工具用於繪製路徑點，以及一個 WPILib 庫 (PathPlannerLib)
+          用於在機器人程式碼中執行這些路徑。PathPlanner 支持差速驅動和 Swerve
+          驅動兩種底盤類型，並能處理路徑跟隨和動態避障。
+        </p>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          PathPlanner 工作流程
+        </h4>
+        <ul class="list-disc list-inside space-y-2 mb-6 text-gray-700">
+          <li>
+            <strong class="font-semibold">路徑設計 (GUI):</strong> 使用
+            PathPlanner GUI 在場地圖上拖放路徑點、設定速度、加速限制、事件點等。
+          </li>
+          <li>
+            <strong class="font-semibold">路徑生成:</strong> GUI 會生成一個 JSON
+            文件，其中包含路徑的所有數據。
+          </li>
+          <li>
+            <strong class="font-semibold">程式碼整合 (PathPlannerLib):</strong>
+            在機器人程式碼中使用 PathPlannerLib 載入這些 JSON
+            路徑，並執行路徑跟隨命令。
+          </li>
+          <li>
+            <strong class="font-semibold">Pathfinding (路徑尋徑):</strong>
+            PathPlanner 還支持實時路徑尋徑，利用 A*
+            演算法在未知環境中找到到達目標的最優路徑。
+          </li>
+        </ul>
+        <h4 class="font-semibold text-lg text-[#2C3E50] mb-2">
+          PathPlannerLib 範例 (Java)
+        </h4>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// ... 在 RobotContainer.java 或你的 Robot 類別中
+
+// 載入一個 PathPlanner 路徑
+public Command getAutonomousCommand() {
+    // PathPlannerTrajectory examplePath = PathPlanner.loadPath("ExamplePath", 3.0, 2.0); // 路徑名稱，最大速度，最大加速度
+
+    // 如果是 Swerve Drive，使用 PPSwerveControllerCommand
+    // PPSwerveControllerCommand swerveAutoCommand = new PPSwerveControllerCommand(
+    //     examplePath,
+    //     m_drivetrain::getPose, // 獲取機器人當前姿勢的方法
+    //     m_drivetrain.getKinematics(), // 機器人的運動學
+    //     new PIDController(kPSwerveDrive, 0, 0), // X 方向的 PID
+    //     new PIDController(kPSwerveDrive, 0, 0), // Y 方向的 PID
+    //     new PIDController(kPSwerveAngle, 0, 0), // 角度的 PID
+    //     m_drivetrain::setModuleStates, // 設定模組狀態的方法
+    //     m_drivetrain // 所需的子系統
+    // );
+    // return swerveAutoCommand;
+
+    // 如果是 Differential Drive，使用 PPRamseteCommand
+    // PPRamseteCommand ramseteAutoCommand = new PPRamseteCommand(
+    //     examplePath,
+    //     m_drivetrain::getPose, // 獲取機器人當前姿勢的方法
+    //     new RamseteController(), // Ramsete 控制器
+    //     m_drivetrain.getFeedforward(), // 驅動前饋
+    //     m_drivetrain.getKinematics(), // 運動學
+    //     m_drivetrain::getWheelSpeeds, // 獲取輪子速度的方法
+    //     new PIDController(kPDifferentialDrive, 0, 0), // 左輪 PID
+    //     new PIDController(kPDifferentialDrive, 0, 0), // 右輪 PID
+    //     m_drivetrain::tankDriveVolts, // 應用電壓到輪子的方法
+    //     m_drivetrain // 所需的子系統
+    // );
+    // return ramseteAutoCommand;
+
+    return null; // 佔位符
+}
+
+// 在 RobotContainer 的建構子中，通常會設定自動命令選擇器
+// public RobotContainer() {
+//     // ... 其他初始化
+//     // m_chooser.addOption("Example Path Auto", getAutonomousCommand());
+//     // SmartDashboard.putData("Auto Choices", m_chooser);
+// }
+</code></pre>
+        <p class="mb-4 text-gray-700 mt-6">
+          PathPlanner
+          極大地簡化了自動模式路徑的創建和實現，讓隊伍能夠專注於更複雜的機器人行為和策略。
+        </p>
+        <a
+          href="https://pathplanner.dev/home.html"
+          target="_blank"
+          class="resource-link mr-4"
+          ><i class="fas fa-map-signs mr-2"></i>PathPlanner 官方文件</a
+        >
+        <a
+          href="https://www.youtube.com/watch?v=kYJj8G8g0aQ"
+          target="_blank"
+          class="resource-link"
+          ><i class="fab fa-youtube mr-2"></i>PathPlanner 影片教學
+          (可自行搜尋更多)</a
+        >
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#2C3E50] text-white mt-8">
+      <div class="container mx-auto px-6 py-8 text-center">
+        <p>&copy; 2025 FRC 7130 FutureShock. All Rights Reserved.</p>
+        <p class="text-sm text-gray-400 mt-2">
+          此網頁為教學範例，內容基於 FRC 與 WPILib 官方文件。
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>
