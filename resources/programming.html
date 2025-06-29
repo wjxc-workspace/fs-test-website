@@ -540,7 +540,7 @@ public void teleopPeriodic() {
           href="https://www.youtube.com/watch?v=qKy98Cbcltw"
           target="_blank"
           class="resource-link"
-          ><i class="fab fa-youtube mr-2"></i>PID 影片教學 (英文)</a
+          ><i class="fab fa-youtube mr-2"></i>PID 影片示範 (英文)</a
         >
       </section>
 
@@ -984,8 +984,9 @@ public void autonomousInit() {
         </h4>
         <pre
           class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
-        ><code>// 範例：一個 Swerve 模組（單個輪子）
-public class SwerveModule extends SubsystemBase {
+        ><code>// SwerveModule.java
+// 範例：一個 Swerve 模組（單個輪子）
+public class SwerveModule {
     private final CANSparkMax m_driveMotor;
     private final CANSparkMax m_steerMotor;
     private final CANCoder m_steerCANCoder; // 使用 CANCoder 作為轉向絕對編碼器
@@ -994,13 +995,7 @@ public class SwerveModule extends SubsystemBase {
     private final ProfiledPIDController m_drivePIDController; // 驅動 PID (可選)
 
     public SwerveModule(int driveMotorID, int steerMotorID, int steerCANCoderID) {
-        // 初始化馬達和 CANCoder
-        m_driveMotor = new CANSparkMax(driveMotorID, MotorType.kBrushless);
-        m_steerMotor = new CANSparkMax(steerMotorID, MotorType.kBrushless);
-        m_steerCANCoder = new CANCoder(steerCANCoderID);
-
-        // 初始化 PID 控制器
-        m_steerPIDController = new PIDController(kP, kI, kD);
+        // - 初始化馬達, CANCoder, 以及 PID 控制器
         m_steerPIDController.enableContinuousInput(-Math.PI, Math.PI); // 角度連續性
     }
 
@@ -1010,7 +1005,8 @@ public class SwerveModule extends SubsystemBase {
      */
     public void setDesiredState(SwerveModuleState desiredState) {
         // 計算轉向馬達的 PID 輸出
-        double steerOutput = m_steerPIDController.calculate(m_steerCANCoder.getPosition(), desiredState.angle.getRadians());
+        double steerOutput = m_steerPIDController.calculate(
+          m_steerCANCoder.getPosition(), desiredState.angle.getRadians());
         m_steerMotor.set(steerOutput);
 
         // 設定驅動馬達的速度 (通常直接設定為所需速度)
@@ -1022,7 +1018,9 @@ public class SwerveModule extends SubsystemBase {
      * @return 當前 SwerveModuleState
      */
     public SwerveModuleState getState() {
-        return new SwerveModuleState(m_driveMotor.getEncoder().getVelocity(), new Rotation2d(m_steerCANCoder.getPosition()));
+        return new SwerveModuleState(
+          m_driveMotor.getEncoder().getVelocity(),
+          new Rotation2d(m_steerCANCoder.getPosition()));
     }
 
     /**
@@ -1030,15 +1028,15 @@ public class SwerveModule extends SubsystemBase {
      * @return 當前 SwerveModulePosition
      */
     public SwerveModulePosition getPosition() {
-        return new SwerveModulePosition(m_driveMotor.getEncoder().getPosition(), new Rotation2d(m_steerCANCoder.getPosition()));
-    }
-
-    @Override
-    public void periodic() {
-        // 更新儀表板數據等
+        return new SwerveModulePosition(
+          m_driveMotor.getEncoder().getPosition(),
+          new Rotation2d(m_steerCANCoder.getPosition()));
     }
 }
-
+</code></pre>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// SwerveSubsystem.java
 // 範例：Swerve 底盤子系統
 public class SwerveDrivetrain extends SubsystemBase {
     private final SwerveModule m_frontLeft = new SwerveModule(..., ..., ...);
@@ -1059,7 +1057,10 @@ public class SwerveDrivetrain extends SubsystemBase {
         m_kinematics = new SwerveDriveKinematics(frontLeftLocation, ...);
         m_odometry = new SwerveDriveOdometry(m_kinematics, m_gyro.getRotation2d(),
             new SwerveModulePosition[] {
-                m_frontLeft.getPosition(), m_frontRight.getPosition(), m_rearLeft.getPosition(), m_rearRight.getPosition()
+                m_frontLeft.getPosition(),
+                m_frontRight.getPosition(),
+                m_rearLeft.getPosition(),
+                m_rearRight.getPosition()
             }, new Pose2d());
     }
 
@@ -1091,14 +1092,6 @@ public class SwerveDrivetrain extends SubsystemBase {
     }
 
     /**
-     * 獲取 Swerve 運動學。
-     * @return SwerveDriveKinematics 實例
-     */
-    public SwerveDriveKinematics getKinematics() {
-        return m_kinematics;
-    }
-
-    /**
      * 設定 Swerve 模組狀態。
      * @param desiredStates 目標 SwerveModuleState 陣列
      */
@@ -1112,9 +1105,11 @@ public class SwerveDrivetrain extends SubsystemBase {
         // 更新里程計
         m_odometry.update(m_gyro.getRotation2d(),
             new SwerveModulePosition[] {
-                m_frontLeft.getPosition(), m_frontRight.getPosition(), m_rearLeft.getPosition(), m_rearRight.getPosition()
+                m_frontLeft.getPosition(),
+                m_frontRight.getPosition(),
+                m_rearLeft.getPosition(),
+                m_rearRight.getPosition()
             });
-        SmartDashboard.putData("Field", m_field); // 將機器人位置顯示在 Field2d 上
     }
 }
 </code></pre>
@@ -1178,49 +1173,46 @@ public class SwerveDrivetrain extends SubsystemBase {
         </h4>
         <pre
           class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
-        ><code>// ... 在 RobotContainer.java 或你的 Robot 類別中
+        ><code>// SwerveSubsytem.java
+// 在 Swerve Class 的 Constructor中，設定 AutoBuilder
+AutoBuilder.configure(
+    this::getPose, // 提供機器人位置的方法
+    this::resetPose, // 重設機器人里程計的方法 (可以在路徑跟隨開始時調用)
+    this::getRobotRelativeSpeeds, // 提供機器人速度的方法，必須是 ROBOT RELATIVE
+    (speeds, feedforwards) -> driveRobotRelative(speeds), // 驅動底盤的方法，必須是 ROBOT RELATIVE
+    new PPHolonomicDriveController( // 路徑跟隨時的 PID 控制器
+            new PIDConstants(5.0, 0.0, 0.0), // 平移 PID 常數
+            new PIDConstants(5.0, 0.0, 0.0) // 旋轉 PID 常數
+    ),
+    config, // 機器人的物理參數
+    () -> {
+      // 判斷是否要鏡像路徑的方法
+      var alliance = DriverStation.getAlliance();
+      if (alliance.isPresent()) {
+        return alliance.get() == DriverStation.Alliance.Red;
+      }
+      return false;
+    },
+    this // 機器人的底盤子系統，用來讓 Command Scheduler 可以調用底盤子系統的方法
+);
+</code></pre>
+        <pre
+          class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto mb-6"
+        ><code>// RobotContainer.java
+public RobotContainer() {
+    // ...
 
-// 載入一個 PathPlanner 路徑
-public Command getAutonomousCommand() {
-    // PathPlannerTrajectory examplePath = PathPlanner.loadPath("ExamplePath", 3.0, 2.0); // 路徑名稱，最大速度，最大加速度
+    // 建立自動選擇器 (autoChooser)，選項是 PathPlanner GUI 中的所有自動 (Auto)
+    autoChooser = AutoBuilder.buildAutoChooser();
 
-    // 如果是 Swerve Drive，使用 PPSwerveControllerCommand
-    // PPSwerveControllerCommand swerveAutoCommand = new PPSwerveControllerCommand(
-    //     examplePath,
-    //     m_drivetrain::getPose, // 獲取機器人當前姿勢的方法
-    //     m_drivetrain.getKinematics(), // 機器人的運動學
-    //     new PIDController(kPSwerveDrive, 0, 0), // X 方向的 PID
-    //     new PIDController(kPSwerveDrive, 0, 0), // Y 方向的 PID
-    //     new PIDController(kPSwerveAngle, 0, 0), // 角度的 PID
-    //     m_drivetrain::setModuleStates, // 設定模組狀態的方法
-    //     m_drivetrain // 所需的子系統
-    // );
-    // return swerveAutoCommand;
-
-    // 如果是 Differential Drive，使用 PPRamseteCommand
-    // PPRamseteCommand ramseteAutoCommand = new PPRamseteCommand(
-    //     examplePath,
-    //     m_drivetrain::getPose, // 獲取機器人當前姿勢的方法
-    //     new RamseteController(), // Ramsete 控制器
-    //     m_drivetrain.getFeedforward(), // 驅動前饋
-    //     m_drivetrain.getKinematics(), // 運動學
-    //     m_drivetrain::getWheelSpeeds, // 獲取輪子速度的方法
-    //     new PIDController(kPDifferentialDrive, 0, 0), // 左輪 PID
-    //     new PIDController(kPDifferentialDrive, 0, 0), // 右輪 PID
-    //     m_drivetrain::tankDriveVolts, // 應用電壓到輪子的方法
-    //     m_drivetrain // 所需的子系統
-    // );
-    // return ramseteAutoCommand;
-
-    return null; // 佔位符
+    // 將自動選擇器加入 SmartDashboard，使用者可以選擇自動
+    SmartDashboard.putData("Auto Chooser", autoChooser);
 }
 
-// 在 RobotContainer 的建構子中，通常會設定自動命令選擇器
-// public RobotContainer() {
-//     // ... 其他初始化
-//     // m_chooser.addOption("Example Path Auto", getAutonomousCommand());
-//     // SmartDashboard.putData("Auto Choices", m_chooser);
-// }
+public Command getAutonomousCommand() {
+    // 返回選擇的自動
+    return autoChooser.getSelected();
+}
 </code></pre>
         <p class="mb-4 text-gray-700 mt-6">
           PathPlanner
@@ -1233,7 +1225,7 @@ public Command getAutonomousCommand() {
           ><i class="fas fa-map-signs mr-2"></i>PathPlanner 官方文件</a
         >
         <a
-          href="https://www.youtube.com/watch?v=kYJj8G8g0aQ"
+          href="https://www.youtube.com/watch?v=vPrRsnVQgf4"
           target="_blank"
           class="resource-link"
           ><i class="fab fa-youtube mr-2"></i>PathPlanner 影片教學
